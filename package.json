@@ -12,6 +12,8 @@
     "prettier": "^3.2.5"
   },
   "scripts": {
-    "lint": "npx eslint ."
+    "start": "nodemon app.js",
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js"
   }
 }
