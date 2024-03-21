@@ -1,5 +1,5 @@
 // import mongoose for the schemas
-const mongoose = require("mogoose");
+const mongoose = require("mongoose");
 
 // import validator
 const validator = require("validator");
@@ -55,4 +55,4 @@ userSchema.statics.findUserByCredentials = function (email, password) {
     });
 };
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("userSchema", userSchema);
