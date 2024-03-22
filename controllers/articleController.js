@@ -31,6 +31,7 @@ const createArticle = (req, res, next) => {
     });
 };
 
+//* Deletes Articles
 const deleteArticle = (req, res, next) => {
   const { articleId } = req.params;
   const { _id: userId } = req.user;

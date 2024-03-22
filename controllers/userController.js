@@ -85,7 +85,7 @@ const loginUser = (req, res, next) => {
 //* Gets the current loggedin user
 const getCurrentUser = (req, res, next) => {
   // Each user res in the DB gets a _id parameter, this is what we need to grab to filter out the users
-  const { _id: userId } = req.params;
+  const { _id: userId } = req.user;
 
   User.findById(userId)
     .then((user) => {
@@ -100,9 +100,34 @@ const getCurrentUser = (req, res, next) => {
     });
 };
 
+//* Updates a user
+const updateUser = (req, res, next) => {
+  const { name, avatar } = req.body;
+  const userId = req.user._id;
+  User.findByIdAndUpdate(
+    userId,
+    { name, avatar },
+    { new: true, runValidators: true }
+  )
+    .then((user) => {
+      if (!user) {
+        return next(new NOTFOUND_ERROR("User not found"));
+      }
+      return res.send({ data: user });
+    })
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        next(new InvalidError("Validation Error"));
+      } else {
+        next(err);
+      }
+    });
+};
+
 module.exports = {
   createUser,
   getCurrentUser,
   getUsers,
   loginUser,
+  updateUser,
 };
