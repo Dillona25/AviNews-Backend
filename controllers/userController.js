@@ -56,6 +56,7 @@ const createUser = (req, res, next) => {
     });
 };
 
+//* Logs a user in with the correct credentials
 const loginUser = (req, res, next) => {
   // Email and password are the the needed params for the req.body
   const { email, password } = req.body;

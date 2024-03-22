@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const user = require("./userRoute");
+const article = require("./articleRoute");
 const { createUser, loginUser } = require("../controllers/userController");
 const { NOTFOUND_ERROR } = require("../errors/notFoundError");
 
-//* Making sure the app uses the users routes
+//* Making sure the app uses the users and articles routes
 router.use("/users", user);
+router.use("/articles", article);
 
 //* Creates a user in the DB using '/signup' in Postman
 router.post("/signup", createUser);

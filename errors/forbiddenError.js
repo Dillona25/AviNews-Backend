@@ -1,4 +1,4 @@
-class ForbiddenError extends Error {
+class FORBIDDEN_ERROR extends Error {
   constructor(message) {
     super(message);
     this.name = "FORBIDDEN_ERROR";
@@ -6,4 +6,4 @@ class ForbiddenError extends Error {
   }
 }
 
-module.exports = ForbiddenError;
+module.exports = FORBIDDEN_ERROR;
