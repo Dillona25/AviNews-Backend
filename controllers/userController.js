@@ -2,21 +2,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/config");
 const User = require("../models/userSchema");
-const UNAUTHORIZED_ERROR = require("../errors/unauthorizedError");
+const UNAUTHORIZED_ERROR = require("../errors/notAuthorizedError");
 const ConflictError = require("../errors/conflictError");
 const InvalidError = require("../errors/invalidError");
 const NOTFOUND_ERROR = require("../errors/notFoundError");
 const SERVER_ERROR = require("../errors/serverError");
 const INVALID_ERROR = require("../errors/invalidError");
-
-//* Gets a list of all the users in the DB
-const getUsers = (req, res) => {
-  User.find({})
-    .then((user) => res.status(200).send(user))
-    .catch((err) => {
-      res.status(SERVER_ERROR).send({ message: "Error from getItem", err });
-    });
-};
 
 //* Creates a user into the DB
 const createUser = (req, res, next) => {
@@ -27,7 +18,7 @@ const createUser = (req, res, next) => {
     .then((user) => {
       // If not a valid email, return a new error
       if (!email) {
-        return next(new UnauthorizedError("Please enter a valid email"));
+        return next(new UNAUTHORIZED_ERROR("Please enter a valid email"));
       }
       // If there is already a user return a new error
       if (user) {
@@ -63,9 +54,8 @@ const loginUser = (req, res, next) => {
 
   // If not a valid email or password, return and error
   if (!email || !password) {
-    return res
-      .status(INVALID_ERROR)
-      .send({ message: "Invalid email or password" });
+    res.status(INVALID_ERROR).send({ message: "Invalid email or password" });
+    return;
   }
 
   // Find a user by credentials
@@ -127,7 +117,6 @@ const updateUser = (req, res, next) => {
 module.exports = {
   createUser,
   getCurrentUser,
-  getUsers,
   loginUser,
   updateUser,
 };
