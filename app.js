@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const helmet = require("helmet");
 const mongoose = require("mongoose");
 const { errors } = require("celebrate");
 const cors = require("cors");
@@ -14,6 +15,8 @@ app.use(cors());
 
 const DATABASE_URL =
   process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/AviNews";
+
+app.use(helmet());
 
 mongoose.connect(DATABASE_URL);
 
