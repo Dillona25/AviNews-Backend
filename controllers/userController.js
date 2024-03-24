@@ -6,7 +6,6 @@ const UNAUTHORIZED_ERROR = require("../errors/notAuthorizedError");
 const ConflictError = require("../errors/conflictError");
 const InvalidError = require("../errors/invalidError");
 const NOTFOUND_ERROR = require("../errors/notFoundError");
-const SERVER_ERROR = require("../errors/serverError");
 const INVALID_ERROR = require("../errors/invalidError");
 
 //* Creates a user into the DB
