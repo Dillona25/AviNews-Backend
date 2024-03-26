@@ -12,9 +12,10 @@ This repo is the backend code for AviNews. Avinews is a full-stack news wesbite 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white)
 
-# Live Site
+# Live Site and API
 
 🚀 https://www.avinews.twilightparadox.com/ 🚀
+https://api.avinews.twilightparadox.com/
 
 # Frontend code
 
