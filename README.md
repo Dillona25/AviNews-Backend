@@ -15,7 +15,6 @@ This repo is the backend code for AviNews. Avinews is a full-stack news wesbite 
 # Live Site and API
 
 🚀 https://www.avinews.twilightparadox.com/ 🚀
-https://api.avinews.twilightparadox.com/
 
 # Frontend code
 
