@@ -64,29 +64,23 @@ const validateUpdateUser = celebrate({
 
 const createArticleValidation = celebrate({
   [Segments.BODY]: Joi.object({
-    keyword: Joi.string().required().messages({
-      "string.empty": "The 'keyword' field must be filled in",
-    }),
     title: Joi.string().required().messages({
       "string.empty": "The 'title' field must be filled in",
     }),
-    text: Joi.string().required().messages({
+    description: Joi.string().required().messages({
       "string.empty": "The 'text' field must be filled in",
     }),
-    date: Joi.string().required().messages({
+    publishedAt: Joi.string().required().messages({
       "string.empty": "The 'date' field must be filled in",
-    }),
-    source: Joi.string().required().messages({
-      "string.empty": "The 'source' field must be filled in",
     }),
     author: Joi.string().required().messages({
       "string.empty": "The 'author' field must be filled in",
     }),
-    link: Joi.string().custom(validateURL).required().messages({
+    url: Joi.string().custom(validateURL).required().messages({
       "string.empty": "The 'link' field must be filled in",
       "string.uri": "The 'link' field must be a valid url",
     }),
-    image: Joi.string().custom(validateURL).required().messages({
+    urlToImage: Joi.string().custom(validateURL).required().messages({
       "string.empty": "The 'image' field must be filled in",
       "string.uri": "The 'image' field must be a valid url",
     }),

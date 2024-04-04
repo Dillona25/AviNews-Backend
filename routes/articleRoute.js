@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { handleAuthorization } = require("../middlewares/auth");
 const {
-  createArticle,
+  saveArticle,
   deleteArticle,
+  getSavedArticles,
 } = require("../controllers/articleController");
 const { getArticles } = require("../controllers/savedArticlesController");
 const {
@@ -10,8 +11,11 @@ const {
   idValidation,
 } = require("../middlewares/celebrateValidation");
 
+//* Rpute to get saved articles
+router.get("/", handleAuthorization, getSavedArticles);
+
 //* Route to create articles
-router.post("/", handleAuthorization, createArticleValidation, createArticle);
+router.post("/", handleAuthorization, createArticleValidation, saveArticle);
 
 //* Route to delete articles
 router.delete("/:articleId", handleAuthorization, idValidation, deleteArticle);

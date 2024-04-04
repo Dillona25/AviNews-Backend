@@ -3,19 +3,24 @@ const INVALID_ERROR = require("../errors/invalidError");
 const NOTFOUND_ERROR = require("../errors/notFoundError");
 const FORBIDDEN_ERROR = require("../errors/forbiddenError");
 
+//* Gets a users saved articles
+const getSavedArticles = (req, res, next) => {
+  Article.find({ owner: req.user._id })
+    .then((articles) => res.send(articles))
+    .catch(next);
+};
+
 //* Creates articles
-const createArticle = (req, res, next) => {
-  const { keyword, title, text, date, source, author, link, image } = req.body;
+const saveArticle = (req, res, next) => {
+  const { title, description, publishedAt, author, url, urlToImage } = req.body;
 
   Article.create({
-    keyword,
     title,
-    text,
-    date,
-    source,
+    description,
+    publishedAt,
     author,
-    link,
-    image,
+    url,
+    urlToImage,
     owner: req.user._id,
   })
     .then((item) => {
@@ -55,6 +60,7 @@ const deleteArticle = (req, res, next) => {
 };
 
 module.exports = {
-  createArticle,
+  saveArticle,
   deleteArticle,
+  getSavedArticles,
 };
