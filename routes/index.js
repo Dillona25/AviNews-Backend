@@ -7,11 +7,11 @@ const {
   userBodyValidator,
   userAuthenticationValidator,
 } = require("../middlewares/celebrateValidation");
-const limiter = require("../rateLimiter");
+// const limiter = require("../rateLimiter");
 
 //* Making sure the app uses the users and articles routes
-router.use("/users", limiter, user);
-router.use("/articles", limiter, article);
+router.use("/users", user);
+router.use("/articles", article);
 
 //* Creates a user in the DB using '/signup' in Postman
 router.post("/signup", userBodyValidator, createUser);
