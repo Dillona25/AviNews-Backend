@@ -113,9 +113,53 @@ const updateUser = (req, res, next) => {
     });
 };
 
+//* Checks to see if a user exists with the current email
+
+const validateUserEmail = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.json({ exists: true });
+    } else {
+      return res.json({ exists: false });
+    }
+  } catch (error) {
+    console.error("Error checking email:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+//* Checks if the password matches the email
+
+const validateUserPassword = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    // Compare provided password with the hashed password in the database
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      return res.json({ valid: true });
+    } else {
+      return res.status(401).json({ error: "Invalid password" });
+    }
+  } catch (error) {
+    console.error("Error checking email or password:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   createUser,
   getCurrentUser,
   loginUser,
   updateUser,
+  validateUserEmail,
+  validateUserPassword,
 };
