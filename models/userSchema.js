@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    // Select false means when querying users in the DB by default we do not select and include the password
     select: false,
   },
 });
